@@ -10,7 +10,8 @@
             min-height: 100vh;
         }
         .sidebar {
-            height: 100vh;
+            overflow-y: auto;
+            height: 100;
             position: fixed;
             left: 0;
             top: 0;
@@ -43,6 +44,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -50,12 +52,26 @@
 
     <nav class="sidebar">
         <a class="navbar-brand text-center fw-bold d-block mb-4 text-white" href="#">Sistema Escolar</a>
-        <a href="/">🏠 Início</a>
+        <a href="#">🏠 Início</a>
         <a href="/aluno">👨‍🎓 Alunos</a>
         <a href="/professor">👩‍🏫 Professores</a>
         <a href="/turma">👩‍🏫 Turmas </a>
         <a href="/curso">📖 Cursos </a>
+        <a href="/saudacao1/testando">🤗 Saudações </a>
+        <a href="/formdesafio">🤗 desafio </a>
     </nav>
 
     <!-- Main content -->
     <div class="main">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+
+            <div class="alert alert-{{ category }} alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+               {{message}}
+            </div
+            {% endfor %}
+        {% endif %}
+        {% endwith %}

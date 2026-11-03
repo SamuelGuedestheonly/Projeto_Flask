@@ -13,3 +13,18 @@ class TurmaDAO:
         
         return lista
 
+    def salvar(self, id, semestre, curso_id, professor_id):
+        conn = get_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+                'INSERT INTO turma (semestre, curso_id, professor_id) VALUES (%s, %s, %s)',
+                (semestre, curso_id, professor_id)
+            )
+            conn.commit()
+            return {"status": "ok"}
+        except Exception as e:
+            return {"status": "erro", "mensagem": f"Erro: {str(e)}"}
+        finally:
+            conn.close()
+

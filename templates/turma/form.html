@@ -1,0 +1,39 @@
+{% include 'dashboard/cabecalho.html' %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Cadastrar Turma</h2>
+    
+    <form action="/turma/salvar/" method="POST">
+        <div class="mb-3">
+            <label for="semestre" class="form-label">Semestre:</label>
+            <input type="text" id="semestre" name="semestre" class="form-control" placeholder="Ex: 2026.1" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="curso_id" class="form-label">Curso:</label>
+            <select name="curso_id" id="curso_id" class="form-select" required>
+                <option value="" selected disabled>Selecione um Curso</option>
+                {% for curso in cursos %}
+                    <!-- curso[0] = id, curso[1] = nome_curso -->
+                    <option value="{{ curso[0] }}">{{ curso[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="professor_id" class="form-label">Professor:</label>
+            <select name="professor_id" id="professor_id" class="form-select" required>
+                <option value="" selected disabled>Selecione um Professor</option>
+                {% for prof in professores %}
+                    <!-- prof[0] = id, prof[1] = nome, prof[2] = disciplina -->
+                    <option value="{{ prof[0] }}">{{ prof[1] }} ({{ prof[2] }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Turma</button>
+        <a href="/turma" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% include 'dashboard/rodape.html' %}

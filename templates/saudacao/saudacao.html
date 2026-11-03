@@ -1,0 +1,15 @@
+{% include 'dashboard/cabecalho.html' %}
+
+<h1 class="mb-4">{{valor_recebido}}</h1>
+
+<a href="/saudacao1/João">Parâmetro de rota</a> <br><br>
+
+<a href="/saudacao2/?nome=Maria">Query String</a>
+
+<form action="/login" method="POST">
+    <input type="text" name="usuario" placeholder="login"> <br><br>
+    <input type="password" name="senha" placeholder="senha"> <br><br>
+    <button type="submit">Enviar</button>
+</form>
+
+{% include 'dashboard/rodape.html' %}
