@@ -5,7 +5,6 @@ from dao.professor_dao import ProfessorDAO
 from dao.turma_dao import TurmaDAO
 from dao.curso_dao import CursoDAO
 
-app = Flask(__name__)
 
 app = Flask(__name__)
 app.secret_key = "uma_chave_muito_secreta_e_unica"
@@ -37,8 +36,8 @@ def form_aluno():
 
 @app.route('/aluno/salvar/', methods=['POST'])
 def salvar_aluno(id=None):
-        nome = request.form['nome'],
-        idade = request.form['idade'],
+        nome = request.form['nome']
+        idade = request.form['idade']
         cidade = request.form['cidade']
         dao=AlunoDAO()
         result=dao.salvar(id, nome, idade, cidade)
