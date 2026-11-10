@@ -1,0 +1,56 @@
+
+<h1>Lista de Matrículas</h1>
+
+<div class="mb-3">
+    <a href="/matricula/form" class="btn btn-success">
+        Nova Matrícula
+    </a>
+</div>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Aluno</th>
+            <th>Curso</th>
+            <th>Semestre</th>
+            <th>Professor</th>
+            <th>Disciplina</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for item in lista %}
+
+        <tr>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+            <td>{{ item[5] }}</td>
+
+            <td>
+                <a href="/matricula/editar/{{ item[0] }}"
+                   class="btn btn-primary btn-sm">
+                    Editar
+                </a>
+
+                <a href="/matricula/remover/{{ item[0] }}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Deseja remover esta matrícula?')">
+                    Remover
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% include 'dashboard/rodape.html' %}

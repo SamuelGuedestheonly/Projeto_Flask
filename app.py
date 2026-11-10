@@ -4,6 +4,7 @@ from dao.aluno_dao import AlunoDAO
 from dao.professor_dao import ProfessorDAO
 from dao.turma_dao import TurmaDAO
 from dao.curso_dao import CursoDAO
+from dao.matricula_dao import MatriculaDAO
 
 
 app = Flask(__name__)
@@ -159,6 +160,95 @@ def salvar_curso(id=None):
 
     return redirect('/curso')
     
+
+@app.route('/matricula')
+def lista_matricula():
+
+    dao = MatriculaDAO()
+    lista = dao.listar()
+
+    return render_template(
+        'matricula/lista.html',
+        lista=lista
+    )
+
+
+@app.route('/matricula/form')
+def form_matricula():
+
+    dao = MatriculaDAO()
+
+    alunos = dao.listar_alunos()
+    cursos = dao.listar_cursos()
+    turmas = dao.listar_turmas()
+
+    return render_template(
+        'matricula/form.html',
+        alunos=alunos,
+        cursos=cursos,
+        turmas=turmas,
+        matricula=None
+    )
+
+
+@app.route('/matricula/salvar/', methods=['POST'])
+def salvar_matricula():
+
+    id = request.form.get('id')
+    aluno_id = request.form['aluno_id']
+    curso_id = request.form['curso_id']
+    turma_id = request.form['turma_id']
+
+    dao = MatriculaDAO()
+
+    result = dao.salvar(
+        id,
+        aluno_id,
+        curso_id,
+        turma_id
+    )
+
+    if result["status"] == "ok":
+        flash("Matrícula salva com sucesso!", "success")
+    else:
+        flash(result["mensagem"], "danger")
+
+    return redirect('/matricula')
+
+
+@app.route('/matricula/editar/<int:id>')
+def editar_matricula(id):
+
+    dao = MatriculaDAO()
+
+    matricula = dao.buscar_por_id(id)
+
+    alunos = dao.listar_alunos()
+    cursos = dao.listar_cursos()
+    turmas = dao.listar_turmas()
+
+    return render_template(
+        'matricula/form.html',
+        matricula=matricula,
+        alunos=alunos,
+        cursos=cursos,
+        turmas=turmas
+    )
+
+
+@app.route('/matricula/remover/<int:id>')
+def remover_matricula(id):
+
+    dao = MatriculaDAO()
+
+    resultado = dao.remover(id)
+
+    if resultado["status"] == "ok":
+        flash("Matrícula removida com sucesso!", "success")
+    else:
+        flash(resultado["mensagem"], "danger")
+
+    return redirect('/matricula')
 
 
 @app.route('/ajuda')

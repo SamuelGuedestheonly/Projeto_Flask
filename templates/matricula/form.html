@@ -1,0 +1,83 @@
+
+{% include 'dashboard/cabecalho.html' %}
+
+<h1>
+    {% if matricula %}
+        Editar Matrícula
+    {% else %}
+        Nova Matrícula
+    {% endif %}
+</h1>
+
+<form action="/matricula/salvar/" method="POST">
+
+    {% if matricula %}
+        <input type="hidden" name="id"
+               value="{{ matricula[0] }}">
+    {% endif %}
+
+    <div class="mb-3">
+        <label class="form-label">Aluno</label>
+
+        <select name="aluno_id" class="form-select" required>
+            <option value="">Selecione um aluno</option>
+
+            {% for aluno in alunos %}
+                <option value="{{ aluno[0] }}"
+                    {% if matricula and matricula[1] == aluno[0] %}
+                        selected
+                    {% endif %}>
+                    {{ aluno[1] }}
+                </option>
+            {% endfor %}
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Curso</label>
+
+        <select name="curso_id" class="form-select" required>
+            <option value="">Selecione um curso</option>
+
+            {% for curso in cursos %}
+                <option value="{{ curso[0] }}"
+                    {% if matricula and matricula[2] == curso[0] %}
+                        selected
+                    {% endif %}>
+                    {{ curso[1] }}
+                </option>
+            {% endfor %}
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Turma</label>
+
+        <select name="turma_id" class="form-select" required>
+            <option value="">Selecione uma turma</option>
+
+            {% for turma in turmas %}
+                <option value="{{ turma[0] }}"
+                    {% if matricula and matricula[3] == turma[0] %}
+                        selected
+                    {% endif %}>
+                    {{ turma[1] }}
+                </option>
+            {% endfor %}
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Salvar
+    </button>
+
+    <a href="/matricula" class="btn btn-secondary">
+        Voltar
+    </a>
+
+</form>
+
+{% include 'dashboard/rodape.html' %}
