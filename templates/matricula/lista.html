@@ -1,10 +1,12 @@
 
-<h1>Lista de Matrículas</h1>
+{% include 'dashboard/cabecalho.html' %}
 
-<div class="mb-3">
-    <a href="/matricula/form" class="btn btn-success">
-        Nova Matrícula
-    </a>
+<h1 class="mb-4">Lista Matrículas</h1>
+
+<a href="/matricula/form" class="btn btn-primary mb-3">Novo</a>
+
+<div class="row">
+
 </div>
 
 <table class="table table-bordered table-striped">
@@ -35,15 +37,10 @@
 
             <td>
                 <a href="/matricula/editar/{{ item[0] }}"
-                   class="btn btn-primary btn-sm">
-                    Editar
-                </a>
+                   class="btn btn-primary btn-sm">Editar</a>
 
                 <a href="/matricula/remover/{{ item[0] }}"
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('Deseja remover esta matrícula?')">
-                    Remover
-                </a>
+                   class="btn btn-danger btn-sm">Remover</a>
             </td>
         </tr>
 
